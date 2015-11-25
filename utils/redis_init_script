@@ -2,6 +2,9 @@
 #
 # Simple Redis init.d script conceived to work on Linux systems
 # as it does use of the /proc filesystem.
+# Source function library.
+. /etc/init.d/functions
+
 
 REDISPORT=6379
 EXEC=/usr/local/bin/redis-server
@@ -35,6 +38,10 @@ case "$1" in
                 done
                 echo "Redis stopped"
         fi
+        ;;
+    status)
+        status -p $PIDFILE redis
+        script_result=$?
         ;;
     *)
         echo "Please use start or stop as first argument"
